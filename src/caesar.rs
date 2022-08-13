@@ -19,22 +19,6 @@ static ASCII_UPPER: [char; 26] = [
 pub fn decrypt(input: String, key: u16) -> String {
     input.chars().map(|c| 
         if c.is_ascii_lowercase() {
-            let index = ASCII_LOWER.iter().position(|&r| r == c).unwrap();
-            ASCII_LOWER[(index + key as usize) % 26]
-        }
-        else if c.is_ascii_uppercase() {
-            let index = ASCII_UPPER.iter().position(|&r| r == c).unwrap();
-            ASCII_UPPER[(index + key as usize) % 26]
-        }
-        else {
-            c
-        }
-    ).collect()
-}
-
-pub fn encrypt(input: String, key: u16) -> String {
-    input.chars().map(|c| 
-        if c.is_ascii_lowercase() {
             let mut index: i16 = ASCII_LOWER.iter()
             .position(|&r| r == c)
             .unwrap() as i16 - key as i16;
@@ -47,6 +31,23 @@ pub fn encrypt(input: String, key: u16) -> String {
             .unwrap() as i16 - key as i16;
             if index < 0 { index = 26 + index }
             ASCII_UPPER[(index as usize) % 26]
+        }
+        else {
+            c
+        }
+    ).collect()
+}
+
+pub fn encrypt(input: String, key: u16) -> String {
+    
+    input.chars().map(|c| 
+        if c.is_ascii_lowercase() {
+            let index = ASCII_LOWER.iter().position(|&r| r == c).unwrap();
+            ASCII_LOWER[(index + key as usize) % 26]
+        }
+        else if c.is_ascii_uppercase() {
+            let index = ASCII_UPPER.iter().position(|&r| r == c).unwrap();
+            ASCII_UPPER[(index + key as usize) % 26]
         }
         else {
             c
