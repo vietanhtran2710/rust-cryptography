@@ -39,7 +39,6 @@ pub fn decrypt(input: String, key: u16) -> String {
 }
 
 pub fn encrypt(input: String, key: u16) -> String {
-    
     input.chars().map(|c| 
         if c.is_ascii_lowercase() {
             let index = ASCII_LOWER.iter().position(|&r| r == c).unwrap();
