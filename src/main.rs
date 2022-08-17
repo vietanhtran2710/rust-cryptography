@@ -1,6 +1,7 @@
 use std::env;
 pub mod caesar;
 pub mod affine;
+pub mod vigenere;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -23,7 +24,7 @@ fn main() {
         }
     }
     else if args[1] == "affine" {
-        if args.len() < 5 {
+        if args.len() < 6 {
             println!("Usage: cargo run -- affine [-d/-e] [input] [key_a] [key_b]");
             return;
         }
@@ -40,6 +41,20 @@ fn main() {
         }
         else {
             println!("Invalid keys! Key_a and 26 must be coprime. If key_a = 1 => key_b != 0");
+        }
+    }
+    else if args[1] == "vigenere" {
+        if args.len() < 4 {
+            println!("Usage: cargo run -- vigenere [-d/-e] [input] [key]");
+            return;
+        }
+        let key = args[4].to_lowercase();
+        let input = args[3].to_lowercase();
+        if args[2] == "-d" {
+            println!("{}", vigenere::decrypt(input, key));
+        }
+        else {
+            println!("{}", vigenere::encrypt(input, key));
         }
     }
 }
