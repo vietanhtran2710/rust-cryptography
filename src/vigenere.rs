@@ -1,21 +1,3 @@
-// static ASCII_LOWER: [char; 26] = [
-//     'a', 'b', 'c', 'd', 'e', 
-//     'f', 'g', 'h', 'i', 'j', 
-//     'k', 'l', 'm', 'n', 'o',
-//     'p', 'q', 'r', 's', 't', 
-//     'u', 'v', 'w', 'x', 'y', 
-//     'z',
-// ];
-
-// static ASCII_UPPER: [char; 26] = [
-//     'A', 'B', 'C', 'D', 'E', 
-//     'F', 'G', 'H', 'I', 'J', 
-//     'K', 'L', 'M', 'N', 'O',
-//     'P', 'Q', 'R', 'S', 'T', 
-//     'U', 'V', 'W', 'X', 'Y', 
-//     'Z',
-// ];
-
 static TABLE: [&str; 26] = [
     "abcdefghijklmnopqrstuvwxyz",
     "bcdefghijklmnopqrstuvwxyza",
@@ -46,7 +28,12 @@ static TABLE: [&str; 26] = [
 ];
 
 pub fn decrypt(input: String, key: String) -> String {
-    "".to_string()
+    input.chars().enumerate().map(|(index, c)| 
+        {
+            let row = key.chars().nth(index % key.len()).unwrap() as usize - 97;
+            (TABLE[row].chars().position(|r| r == c).unwrap() as u8 + 97) as char
+        }
+    ).collect()
 }
 
 pub fn encrypt(input: String, key: String) -> String {
