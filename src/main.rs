@@ -14,7 +14,7 @@ fn main() {
             println!("Usage: cargo run -- caesar [-d/-e] [input] [key]");
             return;
         }
-        let key = args[4].parse::<u16>().unwrap();
+        let key: u8 = args[4].parse::<u8>().unwrap();
         let input = &args[3];
         if args[2] == "-d" {
             println!("{}", caesar::decrypt(input.to_string(), key));
