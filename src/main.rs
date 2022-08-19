@@ -28,8 +28,8 @@ fn main() {
             println!("Usage: cargo run -- affine [-d/-e] [input] [key_a] [key_b]");
             return;
         }
-        let key_a = args[4].parse::<u16>().unwrap();
-        let key_b = args[5].parse::<u16>().unwrap();
+        let key_a = args[4].parse::<u8>().unwrap();
+        let key_b = args[5].parse::<u8>().unwrap();
         if affine::check_key(key_a, key_b) {
             let input = &args[3];
             if args[2] == "-d" {
