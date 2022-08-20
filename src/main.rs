@@ -2,6 +2,7 @@ use std::env;
 pub mod caesar;
 pub mod affine;
 pub mod vigenere;
+pub mod hill;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -55,6 +56,20 @@ fn main() {
         }
         else {
             println!("{}", vigenere::encrypt(input, key));
+        }
+    }
+    else if args[1] == "hill" {
+        if args.len() < 4 {
+            println!("Usage: cargo run -- hill [-d/-e] [input] [key]");
+            return;
+        }
+        let key = args[4].to_lowercase();
+        let input = args[3].to_lowercase();
+        if args[2] == "-d" {
+            println!("{}", hill::decrypt(input, key));
+        }
+        else {
+            println!("{}", hill::encrypt(input, key));
         }
     }
 }
